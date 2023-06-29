@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .device-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .device-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .device-name {
+            font-weight: bold;
+        }
+        .device-status {
+            font-style: italic;
+        }
+        .add-device-form {
+            margin-top: 20px;
+        }
+        .add-device-form input[type="text"],
+        .add-device-form select {
+            padding: 5px;
+            width: 200px;
+        }
+        .add-delete-device-form input[type="submit"] {
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .add-delete-device-form input[type="submit"]:hover {
+            background-color: #555;
+        }
+        .add-delete-device-form input[type="submit"]:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome Home!</h1>
+    </div>
+    <div class="container">
+        <h2>Devices</h2>
+        <ul class="device-list">
+            <li>
+                <div class="device-details">
+                    <span class="device-name">Living Room Light</span>
+
+                </div>
+                <div class="device-actions">
+                    <button><a href="{% url 'turn_on_lights' %}">Turn On Lights</a></button>
+
+                </div>
+            </li>
+        </ul>
+        <h2>Add Device</h2>
+        <form class="add-delete-device-form" action="{% url 'add_delete_device' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="device_name" placeholder="Device Name" required>
+            <select name="device_type" required>
+                <option value="" disabled selected>Select Device</option>
+                <option value="light">Living Room Light</option>
+                <option value="thermostat">Thermostat</option>
+                <option value="speaker">Speaker</option>
+                <option value="camera">Security Camera</option>
+                <option value="tv">TV</option>
+            </select>
+            <input type="submit" name = "action" value="Add Device">
+            <input type="submit" name = "action" value="Delete Device">
+         
+        
+
+        </form>
+
+      
+    </div>
+</body>
+</html>
